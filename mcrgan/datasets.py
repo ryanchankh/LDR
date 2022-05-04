@@ -60,9 +60,16 @@ class celeba_dataset(data.Dataset):
 
 def get_dataloader(data_name, root, batch_size, num_workers):
 
-    if data_name in ["lsun_bedroom_128", "cifar10", "stl10_48"]:
+    if data_name in ["lsun_bedroom_128", "stl10_48"]:
         dataset = load_dataset(root=root, name=data_name)
 
+    elif data_name == 'cifar10':
+        transform = transforms.Compose(
+            [transforms.ToTensor(),
+             transforms.Normalize((0.5, ), (0.5, ))])
+        from datasets import CIFAR10
+        dataset = CIFAR10(root=root, train=True, download=True, transform=transform)
+        
     elif data_name == 'celeba':
         dataset = celeba_dataset(root=root, size=128)
 

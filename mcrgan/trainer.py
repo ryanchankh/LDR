@@ -196,7 +196,7 @@ class MUltiGPUTrainer(mmc.training.Trainer):
                     # -----------------------
 
                     self.netD.module.zero_grad()
-                    real_images, real_labels = real_batch
+                    real_images, real_labels, real_indices = real_batch
                     batch_size = real_images.shape[0]  # Match batch sizes for last iter
 
                     # Produce logits for real images

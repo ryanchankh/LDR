@@ -171,9 +171,9 @@ class MCRGANloss(nn.Module):
             scalars.append(trPi / (2 * n))
         return compress_loss, scalars
 
-    def deltaR(self, Z, Y, num_classes):
+    def deltaR(self, Z, Pi, num_classes):
 
-        Pi = F.one_hot(Y, num_classes).to(Z.device)
+        # Pi = F.one_hot(Y, num_classes).to(Z.device)
         discrimn_loss = self.compute_discrimn_loss(Z.T)
         compress_loss, scalars = self.compute_compress_loss(Z.T, Pi)
 
